@@ -1,22 +1,20 @@
 package screens;
 
-import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import game.Game;
 
-public class LoadScreen{
+public class OverScreen{
 	private Game game;
 	private JLabel mainLabel;
 	private JButton bt_back;
-	private JButton bt_load;
 
-	public LoadScreen(Game main_frame){
+	public OverScreen(Game main_frame){
 		this.game = main_frame;
 		
 		this.mainLabel = new JLabel();
-		this.mainLabel.setIcon(new ImageIcon("arquivos/backgrounds/menus/load.png"));
+		this.mainLabel.setIcon(new ImageIcon("arquivos/backgrounds/menus/over.png"));
 		this.mainLabel.setBounds(0,0,400,700);
 		this.mainLabel.setVisible(true);
 		
@@ -26,21 +24,10 @@ public class LoadScreen{
 		this.bt_back.setContentAreaFilled(false);
 		this.bt_back.setOpaque(false);
 		this.bt_back.addActionListener(main_frame);
-				
-		this.bt_load = new JButton();
-		this.bt_load.setBounds(73,611,253,40);
-		this.bt_load.setBackground(new Color(0,0,0,0));
-		this.bt_load.setBorder(null);
-		this.bt_load.setContentAreaFilled(false);
-		this.bt_load.addActionListener(main_frame);
 	}
 	
 	public JButton getBackButton(){
 		return bt_back;
-	}
-
-	public JButton getLoadButton(){
-		return bt_load;
 	}
 
 	public void show(){	
@@ -104,13 +91,13 @@ public class LoadScreen{
 		
 		for(int i = 0; i < level.length; i++){
 			if(level[i] == '1'){
-				label_level[i].setBounds(x_padding, 315, 26, 37);
+				label_level[i].setBounds(x_padding, 335, 26, 37);
 				label_level[i].setVisible(true);
 				this.game.getMainFrame().add(label_level[i]);
 				x_padding += 26+2;
 			}
 			else{
-				label_level[i].setBounds(x_padding, 315, 39, 37);
+				label_level[i].setBounds(x_padding, 335, 39, 37);
 				label_level[i].setVisible(true);
 				this.game.getMainFrame().add(label_level[i]);
 				x_padding += 39+2;
@@ -166,13 +153,13 @@ public class LoadScreen{
 		
 		for(int i = 0; i < score.length; i++){
 			if(score[i] == '1'){
-				label_score[i].setBounds(x_padding, 450, 26, 37);
+				label_score[i].setBounds(x_padding, 435, 26, 37);
 				label_score[i].setVisible(true);
 				this.game.getMainFrame().add(label_score[i]);
 				x_padding += 26+2;
 			}
 			else{
-				label_score[i].setBounds(x_padding, 450, 39, 37);
+				label_score[i].setBounds(x_padding, 435, 39, 37);
 				label_score[i].setVisible(true);
 				this.game.getMainFrame().add(label_score[i]);
 				x_padding += 39+2;
@@ -181,7 +168,6 @@ public class LoadScreen{
 		
 		this.game.getMainFrame().add(mainLabel);
 		this.game.getMainFrame().add(bt_back);
-		this.game.getMainFrame().add(bt_load);
 		
 		this.game.getMainFrame().getContentPane().repaint();
 	}
