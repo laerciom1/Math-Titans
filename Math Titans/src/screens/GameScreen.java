@@ -22,6 +22,7 @@ public class GameScreen extends Thread implements ActionListener{
 	// Level
 	private JLabel[] monsters;
 	private JLabel background;
+	private JLabel showLevel;
 	
 	// GamePlay
 	private ExpressionGenerator eg;
@@ -37,6 +38,7 @@ public class GameScreen extends Thread implements ActionListener{
 	private JLabel[] monster_hp;
 	private int actual_score;
 	private int sublevel_actual_score;
+	private JLabel time_bar;
 	private JLabel time_bar_counting;
 	
 	public GameScreen(Game game){
@@ -88,6 +90,13 @@ public class GameScreen extends Thread implements ActionListener{
 			sublevel = 0;
 			actual_score = 0;
 			sublevel_actual_score = 600;
+			
+			this.time_bar = new JLabel();
+			this.time_bar.setOpaque(true);
+			this.time_bar.setBackground(Color.RED);
+			this.time_bar.setBounds(17, 645, 360, 10);
+			this.time_bar.setVisible(true);
+			
 			this.time_bar_counting = new JLabel();
 			this.time_bar_counting.setOpaque(true);
 			this.time_bar_counting.setBackground(Color.GREEN);
@@ -98,6 +107,13 @@ public class GameScreen extends Thread implements ActionListener{
 				monster_hp[i] = new JLabel();
 			}
 			config_monster_hp(monster_hp, monsters, sublevel);
+
+			this.showLevel = new JLabel();
+			this.showLevel.setText("Level: " + level + "." + (sublevel+1));
+			this.showLevel.setOpaque(false);
+			this.showLevel.setBounds(190, 10, 100, 10);
+			this.showLevel.setVisible(true);
+			
 			background = new JLabel(new ImageIcon("arquivos/backgrounds/levels/"+level+".png"));
 			background.setBounds(0,0,400,700);
 			background.setVisible(true);
@@ -122,10 +138,13 @@ public class GameScreen extends Thread implements ActionListener{
 				actual_score += sublevel_actual_score;
 				sublevel_actual_score = 600;
 				sublevel++;
+				this.showLevel.setText("Level: " + level + "." + (sublevel+1));
 				if(sublevel > 9){
 					score += actual_score;
 					actual_score = 0;
-					loadLevel(++level);
+					game.getGameSave().setScore(score);
+					game.getGameSave().setLevel(++level);
+					loadLevel(level);
 				}
 				else{
 					monster_hp = new JLabel[monsters_hp[sublevel]];
@@ -179,6 +198,7 @@ public class GameScreen extends Thread implements ActionListener{
 			if(paint){
 				game.getMainFrame().getContentPane().removeAll();
 				game.getMainFrame().add(time_bar_counting);
+				game.getMainFrame().add(time_bar);
 				game.getMainFrame().add(right_button);
 				for(JButton jb : wrong_buttons){
 					game.getMainFrame().add(jb);
@@ -195,6 +215,7 @@ public class GameScreen extends Thread implements ActionListener{
 					}
 				}
 				game.getMainFrame().add(bt_back);
+				game.getMainFrame().add(showLevel);
 				game.getMainFrame().add(monsters[sublevel]);
 				game.getMainFrame().add(character);
 				game.getMainFrame().add(background);

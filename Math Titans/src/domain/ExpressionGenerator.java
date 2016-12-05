@@ -63,6 +63,7 @@ public class ExpressionGenerator {
 						int aux = random.nextInt(max_number) + 1;
 						if(randNumber%aux == 0){
 							sresult += aux;
+							randNumber = aux;
 							break;
 						}
 					}
@@ -76,6 +77,7 @@ public class ExpressionGenerator {
 		Object obj = engine.eval(sresult);
 		sresult += "R";
 		sresult += obj;
+		System.out.println("EG: " + sresult);
 		return sresult;
 	}
 }
