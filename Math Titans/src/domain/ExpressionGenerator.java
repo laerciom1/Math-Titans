@@ -1,5 +1,7 @@
 package domain;
 
+//import java.io.FileNotFoundException;
+//import java.io.IOException;
 import java.util.Random;
 
 import javax.script.ScriptEngine;
@@ -20,25 +22,35 @@ public class ExpressionGenerator {
 		while (operandos > 0){
 			while(true){
 				randOp = random.nextInt(4);
-				if(randOp != lastRandOp){
-					lastRandOp = randOp;
-					break;
+				if(level == 1){
+					if(randOp == 2){
+						randOp = 0;
+					}
+					else if(randOp == 3){
+						randOp = 1;
+					}
+					if(randOp != lastRandOp){
+						lastRandOp = randOp;
+						break;
+					}
 				}
-			}
-			if(level == 1){
-				if(randOp == 2){
-					randOp = 0;
+				else if(level == 2){
+					if(randOp == 0){
+						randOp = 2;
+					}
+					else if(randOp == 1){
+						randOp = 3;
+					}
+					if(randOp != lastRandOp){
+						lastRandOp = randOp;
+						break;
+					}
 				}
-				else if(randOp == 3){
-					randOp = 1;
-				}
-			}
-			else if(level == 2){
-				if(randOp == 0){
-					randOp = 2;
-				}
-				else if(randOp == 1){
-					randOp = 3;
+				else if(level == 3){
+					if(randOp != lastRandOp){
+						lastRandOp = randOp;
+						break;
+					}
 				}
 			}
 			switch(randOp){
@@ -80,4 +92,11 @@ public class ExpressionGenerator {
 		System.out.println("EG: " + sresult);
 		return sresult;
 	}
+	
+//	public static void main(String args[]) throws FileNotFoundException, IOException, ScriptException{
+//		ExpressionGenerator eg = new ExpressionGenerator();
+//		while(true){
+//			eg.generate(5, 9, 3);
+//		}
+//	}
 }

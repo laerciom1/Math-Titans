@@ -160,6 +160,11 @@ public class GameScreen extends Thread implements ActionListener{
 		else if((JButton) obj == wrong_buttons[0] ||
 					(JButton) obj == wrong_buttons[1] ||
 						(JButton) obj == wrong_buttons[2]){
+			if(monsters_hp_actual[sublevel] < monsters_hp[sublevel]){
+				monsters_hp_actual[sublevel]++;
+			}
+			paint = true;
+			generate_expression = true;
 		}
 	}
 	
