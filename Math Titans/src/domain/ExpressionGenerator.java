@@ -89,7 +89,7 @@ public class ExpressionGenerator {
 		Object obj = engine.eval(sresult);
 		sresult += "R";
 		sresult += obj;
-		System.out.println("EG: " + sresult);
+		//System.out.println("EG: " + sresult);
 		return sresult;
 	}
 	

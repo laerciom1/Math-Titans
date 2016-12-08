@@ -2,6 +2,8 @@ package game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import screens.HighscoreScreen;
 import screens.LoadScreen;
 import screens.MenuScreen;
 import screens.OverScreen;
+import screens.SavePopup;
 
 public class Game implements ActionListener{
 	
@@ -30,7 +33,7 @@ public class Game implements ActionListener{
 	private FinalScreen final_screen;
 	private OverScreen over_screen;
 	private HighscoreScreen hs_screen;
-	//private HighscoresScreen highscores_screen;
+	private SavePopup savePopup;
 	private GameSave save;
 
 	public Game(){
@@ -42,12 +45,62 @@ public class Game implements ActionListener{
 		this.over_screen = new OverScreen(this);
 		this.hs_screen = new HighscoreScreen(this);
 		this.game_screen = new GameScreen(this);
-		//this.highscores_screen = new HighscoresScreen(this);
-		main_frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.savePopup = new SavePopup(this);
+		configureWindowListener();
+		main_frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		main_frame.setLayout(null);
 		main_frame.setResizable(false);
 		main_frame.setLocationRelativeTo(null);
 		main_frame.setBounds(1000, 100, 400, 700);
+	}
+
+	private void configureWindowListener(){
+		main_frame.addWindowListener(new WindowListener(){
+
+			@Override
+			public void windowActivated(WindowEvent e){
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e){
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e){
+				savePopup.show();
+				main_frame.setEnabled(false);
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e){
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e){
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e){
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e){
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
 	}
 
 	public MenuScreen getMenu_screen(){

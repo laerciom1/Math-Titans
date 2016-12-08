@@ -40,7 +40,7 @@ public class GameScreen extends Thread implements ActionListener{
 	private int sublevel_actual_score;
 	private JLabel time_bar;
 	private JLabel time_bar_counting;
-	
+		
 	public GameScreen(Game game){
 		this.eg = new ExpressionGenerator();
 		this.game = game;
@@ -235,7 +235,9 @@ public class GameScreen extends Thread implements ActionListener{
 				e.printStackTrace();
 			}
 			if(counting){
-				sublevel_actual_score -= 6;
+				int value = 24/(level*monsters_hp[sublevel]);
+				sublevel_actual_score -= value;
+				//System.out.println(value);
 				if(sublevel_actual_score <= 0){
 					setRunning(false);
 					game.getGameSave().setLevel(level);
@@ -243,7 +245,7 @@ public class GameScreen extends Thread implements ActionListener{
 					game.getOver_screen().show();
 					break;
 				}
-				time_bar_counting.setBounds(17, 645, ((360*sublevel_actual_score) / 600), 10);
+				time_bar_counting.setBounds(17, 645, (360*sublevel_actual_score)/600, 10);
 			}
 		}
 	}
